@@ -27,3 +27,20 @@ def test_sip_api():
 
 	assert data["estimated_returns"] > 0
 	assert data["future_value"] > data["total_investment"]
+
+
+def test_cagr_api():
+    response = client.post(
+        "/api/v1/cagr",
+        json={
+            "beginning_value": 100000,
+            "ending_value": 200000,
+            "years": 10
+        }
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert round(data["cagr"], 4) == 7.1773

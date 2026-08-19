@@ -11,3 +11,11 @@ class SIPResponse(BaseModel):
     future_value: float
     total_investment: float
     estimated_returns: float
+
+class CAGRRequest(BaseModel):
+    beginning_value: float = Field(gt=0)
+    ending_value: float = Field(gt=0)
+    years: int = Field(gt=0)
+
+class CAGRResponse(BaseModel):
+    cagr: float
