@@ -44,3 +44,24 @@ def test_cagr_api():
     data = response.json()
 
     assert round(data["cagr"], 4) == 7.1773
+
+def test_sip_api_when_usage_database_fails(monkeypatch):
+
+    def broken_usage(*args, **kwargs):
+        raise RuntimeError("Database unavailable")
+
+    monkeypatch.setattr(
+        "app.routes.calculators.record_api_usage",
+        broken_usage
+    )
+
+    response = client.post(
+        "/api/v1/sip",
+        json={
+            "monthly_investment": 50000,
+            "annual_return": 12,
+            "years": 20
+        }
+    )
+
+    assert response.status_code == 200

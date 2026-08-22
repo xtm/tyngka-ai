@@ -1,5 +1,6 @@
+import logging
 from fastapi import APIRouter, HTTPException
-
+from app.database.usage import record_api_usage
 from calculators.sip import calculate_sip
 from calculators.cagr import calculate_cagr
 
@@ -16,6 +17,7 @@ router = APIRouter(
     tags=["Calculators"]
 )
 
+logger = logging.getLogger(__name__)
 
 @router.post("/sip", response_model=SIPResponse)
 def calculate_sip_api(request: SIPRequest):
@@ -32,6 +34,10 @@ def calculate_sip_api(request: SIPRequest):
             status_code=400,
             detail=str(e)
         )
+    try:
+     record_api_usage("/api/v1/sip")
+    except Exception:
+     logger.exception("Failed to record API usage")
 
     return SIPResponse(
         future_value=result.future_value,
@@ -55,6 +61,10 @@ def calculate_cagr_api(request: CAGRRequest):
             status_code=400,
             detail=str(e)
         )
+    try:
+     record_api_usage("/api/v1/cagr")
+    except Exception:
+     logger.exception("Failed to record API usage")
 
     return CAGRResponse(
         cagr=result.cagr
