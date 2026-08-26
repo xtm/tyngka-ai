@@ -1,12 +1,6 @@
-import os
 import sqlite3
 
-
-DATABASE_PATH = os.getenv(
-    "TYNGKA_DATABASE",
-    "data/tyngka.db"
-)
-
+from app.config import TYNGKA_DATABASE
 
 def get_connection():
-    return sqlite3.connect(DATABASE_PATH)
+	return sqlite3.connect(TYNGKA_DATABASE)
