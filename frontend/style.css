@@ -73,6 +73,7 @@ button {
 .result-item strong {
     font-size: 20px;
 }
+
 .calculator-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -114,6 +115,7 @@ button {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
 @media (max-width: 600px) {
     .calculator-grid {
         grid-template-columns: 1fr;
@@ -124,6 +126,7 @@ button {
         gap:10px;
     }
 }
+
 .navigation {
     display: flex;
     gap: 20px;
@@ -138,4 +141,17 @@ button {
 
 .navigation a:hover {
     text-decoration: underline;
+}
+
+.about-section {
+    margin-top: 40px;
+}
+
+.about-section h2 {
+    margin-bottom: 10px;
+}
+
+.about-section p {
+    color: #6b7280;
+    line-height: 1.6;
 }
