@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyngka - SIP Calculator</title>
+    <title>Tyngka SIP Calculator - Calculate Investment Returns</title>
+    <meta
+        name="description"
+        content="Use the Tyngka SIP Calculator to estimate the future value of monthly investments based on your investment amount, expected return, and time period."
+    >
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <main class="container">
-    <nav class="nvaigator">
-      <a href="index.html">Home</a>
-      <a href="sip.html">SIP Calculator</a>
-      <a href="cagr.html"> CAGR Calculator</a>
-    </nav>
-        <h1>Tyngka</h1>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="sip.html">SIP Calculator</a>
+            <a href="cagr.html">CAGR Calculator</a>
+        </nav>
+
+        <h1>SIP Calculator</h1>
 
         <p class="subtitle">
-            Systematic Investment Plan Calculator
+            Estimate the future value of your monthly investments.
         </p>
 
         <section class="calculator">
-
             <h2>SIP Calculator</h2>
 
             <label for="monthly-investment">
@@ -69,7 +74,23 @@
             <div id="result" class="result"></div>
 
         </section>
+        <section class="about-section">
 
+            <h2>What is a SIP Calculator?</h2>
+
+            <p>
+                A SIP Calculator helps estimate how your regular monthly
+                investments could grow over time based on an expected
+                annual return and investment period.
+            </p>
+
+            <p>
+                Enter your monthly investment, expected annual return,
+                and investment period to estimate your total investment,
+                future value, and potential returns.
+            </p>
+
+        </section>
     </main>
 
     <script src="app.js"></script>
