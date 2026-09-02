@@ -118,4 +118,24 @@ button {
     .calculator-grid {
         grid-template-columns: 1fr;
     }
+    
+    .navigation{
+        flex-direction: column;
+        gap:10px;
+    }
+}
+.navigation {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: bold;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
 }
