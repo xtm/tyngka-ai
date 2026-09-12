@@ -14,7 +14,9 @@ function formatIndianCurrency(value) {
 const button = document.getElementById("calculate-button");
 
     button.addEventListener("click", async () => {
-    
+    const existingInvestment = Number(
+        document.getElementById("existing-investment").value
+    );
 
     const monthlyInvestment = Number(
         document.getElementById("monthly-investment").value
@@ -57,6 +59,7 @@ const button = document.getElementById("calculate-button");
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                existing_investment: existingInvestment,
                 monthly_investment: monthlyInvestment,
                 annual_return: annualReturn,
                 years: years

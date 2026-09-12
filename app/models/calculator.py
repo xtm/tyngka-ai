@@ -2,10 +2,10 @@ from pydantic import BaseModel, Field
 
 
 class SIPRequest(BaseModel):
+    existing_investment: float = Field(ge=0, default=0)
     monthly_investment: float = Field(gt=0)
     annual_return: float = Field(ge=0)
     years: int = Field(gt=0)
-
 
 class SIPResponse(BaseModel):
     future_value: float

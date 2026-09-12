@@ -26,7 +26,8 @@ def calculate_sip_api(request: SIPRequest):
         result = calculate_sip(
             request.monthly_investment,
             request.annual_return,
-            request.years
+            request.years,
+            request.existing_investment
         )
 
     except ValueError as e:

@@ -5,9 +5,18 @@ class SIPResult:
 	total_investment: float
 	estimated_returns: float
 
-def calculate_sip(monthly_investment: float, annual_return: float, years: int)-> SIPResult:
+def calculate_sip(
+    monthly_investment: float,
+    annual_return: float,
+    years: int,
+    existing_investment: float = 0
+) -> SIPResult:
+
     if monthly_investment <= 0:
         raise ValueError("Monthly investment must be greater than zero.")
+
+    if existing_investment < 0:
+        raise ValueError("Existing investment cannot be negative.")
 
     if annual_return < 0:
         raise ValueError("Annual return cannot be negative.")
@@ -19,22 +28,34 @@ def calculate_sip(monthly_investment: float, annual_return: float, years: int)->
     months = years * 12
 
     if monthly_rate == 0:
-        future_value = monthly_investment * months
+        sip_future_value = monthly_investment * months
+        existing_future_value = existing_investment
     else:
-        future_value = (
+        sip_future_value = (
             monthly_investment
             * ((1 + monthly_rate) ** months - 1)
             / monthly_rate
         )
 
-    total_investment = monthly_investment * months
+        existing_future_value = (
+            existing_investment
+            * (1 + monthly_rate) ** months
+        )
+
+    future_value = sip_future_value + existing_future_value
+
+    total_investment = (
+        existing_investment
+        + monthly_investment * months
+    )
+
     estimated_returns = future_value - total_investment
 
     return SIPResult(
-		future_value=future_value,
-		total_investment= total_investment,
-		estimated_returns= estimated_returns)
-
+        future_value=future_value,
+        total_investment=total_investment,
+        estimated_returns=estimated_returns
+    )
 
 if __name__ == "__main__":
     monthly_investment = float(input("Enter monthly investment: "))
