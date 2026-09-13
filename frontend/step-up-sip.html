@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyngka Step-Up SIP Calculator - Calculate Growing SIP Returns</title>
+    <meta
+        name="description"
+        content="Use the Tyngka Step-Up SIP Calculator to estimate how increasing your monthly SIP every year can grow your investment over time."
+    >
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="sip.html">SIP Calculator</a>
+            <a href="step-up-sip.html">Step-Up SIP</a>
+            <a href="cagr.html">CAGR Calculator</a>
+        </nav>
+
+        <h1>Step-Up SIP Calculator</h1>
+
+        <p class="subtitle">
+            Estimate how increasing your SIP every year could grow your investment.
+        </p>
+
+        <section class="calculator">
+            <h2>Step-Up SIP Calculator</h2>
+
+            <label for="existing-investment">
+                Existing Investment
+            </label>
+
+            <input
+                id="existing-investment"
+                type="number"
+                value="0"
+                min="0"
+            >
+
+            <label for="monthly-investment">
+                Starting Monthly Investment
+            </label>
+
+            <input
+                id="monthly-investment"
+                type="number"
+                value="5000"
+                min="1"
+            >
+
+            <label for="step-up-percent">
+                Annual SIP Increase (%)
+            </label>
+
+            <input
+                id="step-up-percent"
+                type="number"
+                value="10"
+                min="0"
+                max="100"
+                step="0.1"
+            >
+
+            <label for="annual-return">
+                Expected Annual Return (%)
+            </label>
+
+            <input
+                id="annual-return"
+                type="number"
+                value="12"
+                min="0"
+                max="100"
+                step="0.1"
+            >
+
+            <label for="years">
+                Investment Period (Years)
+            </label>
+
+            <input
+                id="years"
+                type="number"
+                value="20"
+                min="1"
+                max="100"
+                step="1"
+            >
+
+            <button id="calculate-button">
+                Calculate
+            </button>
+
+            <div id="result" class="result"></div>
+
+        </section>
+
+        <section class="about-section">
+
+            <h2>What is a Step-Up SIP?</h2>
+
+            <p>
+                A Step-Up SIP increases your monthly investment by a fixed
+                percentage every year. This can help you invest more as your
+                income grows.
+            </p>
+
+            <p>
+                Enter your existing investment, starting monthly SIP,
+                annual increase, expected return, and investment period to
+                estimate your future investment value.
+            </p>
+
+        </section>
+    </main>
+
+    <script src="step-up-sip.js"></script>
+
+</body>
+</html>

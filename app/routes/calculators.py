@@ -1,12 +1,13 @@
 import logging
 from fastapi import APIRouter, HTTPException
 from app.database.usage import record_api_usage
-from calculators.sip import calculate_sip
+from calculators.sip import calculate_sip, calculate_step_up_sip
 from calculators.cagr import calculate_cagr
 
 from app.models.calculator import (
 	SIPRequest,
 	SIPResponse,
+        StepUpSIPRequest,
 	CAGRRequest,
 	CAGRResponse
 )
@@ -46,6 +47,34 @@ def calculate_sip_api(request: SIPRequest):
         estimated_returns=result.estimated_returns
     )
 
+@router.post("/step-up-sip", response_model=SIPResponse)
+def calculate_step_up_sip_api(request: StepUpSIPRequest):
+
+    try:
+        result = calculate_step_up_sip(
+            request.monthly_investment,
+            request.annual_return,
+            request.years,
+            request.step_up_percent,
+            request.existing_investment
+        )
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
+    try:
+        record_api_usage("/api/v1/step-up-sip")
+    except Exception:
+        logger.exception("Failed to record API usage")
+
+    return SIPResponse(
+        future_value=result.future_value,
+        total_investment=result.total_investment,
+        estimated_returns=result.estimated_returns
+    )
 
 @router.post("/cagr", response_model=CAGRResponse)
 def calculate_cagr_api(request: CAGRRequest):

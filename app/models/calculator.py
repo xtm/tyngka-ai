@@ -7,6 +7,14 @@ class SIPRequest(BaseModel):
     annual_return: float = Field(ge=0)
     years: int = Field(gt=0)
 
+class StepUpSIPRequest(BaseModel):
+    existing_investment: float = Field(ge=0, default=0)
+    monthly_investment: float = Field(gt=0)
+    annual_return: float = Field(ge=0)
+    years: int = Field(gt=0)
+    step_up_percent: float = Field(ge=0)
+
+
 class SIPResponse(BaseModel):
     future_value: float
     total_investment: float
