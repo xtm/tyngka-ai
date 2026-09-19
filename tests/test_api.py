@@ -65,3 +65,9 @@ def test_sip_api_when_usage_database_fails(monkeypatch):
     )
 
     assert response.status_code == 200
+
+def test_health():
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"

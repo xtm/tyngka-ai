@@ -30,3 +30,9 @@ def root():
         "message": "Welcome to Tyngka API",
         "status": "running"
     }
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok"
+    }
