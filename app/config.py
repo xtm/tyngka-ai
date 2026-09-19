@@ -18,3 +18,8 @@ LOG_LEVEL = os.getenv(
 	"LOG_LEVEL",
 	"INFO"
 )
+
+CORS_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://127.0.0.1:5500"
+).split(",")

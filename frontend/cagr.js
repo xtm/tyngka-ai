@@ -36,7 +36,7 @@ button.addEventListener("click", async () => {
 
     try {
         response = await fetch(
-            "http://127.0.0.1:8000/api/v1/cagr",
+            `${API_BASE_URL}/api/v1/cagr`,
             {
                 method: "POST",
                 headers: {

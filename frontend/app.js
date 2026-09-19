@@ -51,8 +51,8 @@ const button = document.getElementById("calculate-button");
     let response;
 
     try {
-        response = await fetch(
-        "http://127.0.0.1:8000/api/v1/sip",
+         response = await fetch(
+            `${API_BASE_URL}/api/v1/sip`,
         {
             method: "POST",
             headers: {
