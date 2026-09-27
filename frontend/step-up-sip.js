@@ -13,7 +13,7 @@ function formatIndianCurrency(value) {
 
 const button = document.getElementById("calculate-button");
 
-button.addEventListener("click", async () => {
+button.addEventListener("click", () => {
 
     const existingInvestment = Number(
         document.getElementById("existing-investment").value
@@ -63,57 +63,43 @@ button.addEventListener("click", async () => {
     button.innerText = "Calculating...";
     button.disabled = true;
 
-    let response;
+    const monthlyRate = annualReturn / 100 / 12;
+    const months = years * 12;
 
-    try {
-        response = await fetch(
-            `${API_BASE_URL}/api/v1/step-up-sip`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    existing_investment: existingInvestment,
-                    monthly_investment: monthlyInvestment,
-                    annual_return: annualReturn,
-                    years: years,
-                    step_up_percent: stepUpPercent
-                })
-            }
-        );
-    } catch (error) {
-        document.getElementById("result").innerText =
-            "Unable to connect to Tyngka API.";
-        button.innerText = "Calculate";
-        button.disabled = false;
-        return;
+    let monthlySIP = monthlyInvestment;
+    let futureValue = existingInvestment;
+    let totalInvestment = existingInvestment;
+
+    for (let month = 1; month <= months; month++) {
+
+        if (monthlyRate > 0) {
+            futureValue = futureValue * (1 + monthlyRate);
+        }
+
+        futureValue += monthlySIP;
+        totalInvestment += monthlySIP;
+
+        if (month % 12 === 0) {
+            monthlySIP *= (1 + stepUpPercent / 100);
+        }
     }
 
-    if (!response.ok) {
-        document.getElementById("result").innerText =
-            "Unable to calculate. Please check your inputs.";
-        button.innerText = "Calculate";
-        button.disabled = false;
-        return;
-    }
-
-    const data = await response.json();
+    const estimatedReturns = futureValue - totalInvestment;
 
     document.getElementById("result").innerHTML = `
         <div class="result-item">
             <span>Future Value</span>
-            <strong>${formatIndianCurrency(data.future_value)}</strong>
+            <strong>${formatIndianCurrency(futureValue)}</strong>
         </div>
 
         <div class="result-item">
             <span>Total Investment</span>
-            <strong>${formatIndianCurrency(data.total_investment)}</strong>
+            <strong>${formatIndianCurrency(totalInvestment)}</strong>
         </div>
 
         <div class="result-item">
             <span>Estimated Returns</span>
-            <strong>${formatIndianCurrency(data.estimated_returns)}</strong>
+            <strong>${formatIndianCurrency(estimatedReturns)}</strong>
         </div>
     `;
 
