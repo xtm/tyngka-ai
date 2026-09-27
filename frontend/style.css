@@ -61,18 +61,29 @@ input {
 .navigation {
     display: flex;
     align-items: center;
-    gap: 28px;
+    justify-content: space-between;
+    gap: 30px;
     margin-bottom: 70px;
     padding: 4px 0;
 }
 
-.navigation::before {
-    content: "TYNGKA";
-    margin-right: auto;
+.brand {
+    flex-shrink: 0;
+    color: var(--tyngka-primary);
+    text-decoration: none;
     font-size: 20px;
     font-weight: 800;
     letter-spacing: 0.08em;
-    color: var(--tyngka-primary);
+}
+
+.brand:hover {
+    color: var(--tyngka-primary-dark);
+}
+
+.navigation-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
 
 .navigation a {
@@ -85,6 +96,12 @@ input {
 
 .navigation a:hover {
     color: var(--tyngka-primary);
+}
+
+.navigation a:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 
@@ -304,7 +321,6 @@ button:disabled {
     line-height: 1.7;
 }
 
-
 /* ---------- Mobile ---------- */
 
 @media (max-width: 850px) {
@@ -316,19 +332,23 @@ button:disabled {
 @media (max-width: 600px) {
 
     .container {
-        width: min(100% - 32px, var(--content-width));
+        width: min(
+            100% - 32px,
+            var(--content-width)
+        );
         padding: 20px 0 50px;
     }
 
     .navigation {
         flex-wrap: wrap;
-        gap: 14px 20px;
+        gap: 18px;
         margin-bottom: 45px;
     }
 
-    .navigation::before {
+    .navigation-links {
         width: 100%;
-        margin-bottom: 4px;
+        flex-wrap: wrap;
+        gap: 14px 20px;
     }
 
     h1 {
@@ -1635,4 +1655,27 @@ button:disabled {
         gap: 14px;
     }
 
+}
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
