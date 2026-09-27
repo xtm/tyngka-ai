@@ -1,6 +1,6 @@
 const button = document.getElementById("calculate-cagr-button");
 
-button.addEventListener("click", async () => {
+button.addEventListener("click", () => {
 
     const beginningValue = Number(
         document.getElementById("beginning-value").value
@@ -32,47 +32,13 @@ button.addEventListener("click", async () => {
     button.innerText = "Calculating...";
     button.disabled = true;
 
-    let response;
-
-    try {
-        response = await fetch(
-            `${API_BASE_URL}/api/v1/cagr`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    beginning_value: beginningValue,
-                    ending_value: endingValue,
-                    years: years
-                })
-            }
-        );
-    } catch (error) {
-        document.getElementById("cagr-result").innerText =
-            "Unable to connect to Tyngka API.";
-
-        button.innerText = "Calculate";
-        button.disabled = false;
-        return;
-    }
-
-    if (!response.ok) {
-        document.getElementById("cagr-result").innerText =
-            "Unable to calculate. Please check your inputs.";
-
-        button.innerText = "Calculate";
-        button.disabled = false;
-        return;
-    }
-
-    const data = await response.json();
+    const cagr =
+        ((endingValue / beginningValue) ** (1 / years) - 1) * 100;
 
     document.getElementById("cagr-result").innerHTML = `
         <div class="result-item">
             <span>CAGR</span>
-            <strong>${data.cagr.toFixed(2)}%</strong>
+            <strong>${cagr.toFixed(2)}%</strong>
         </div>
     `;
 
