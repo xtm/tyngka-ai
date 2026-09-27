@@ -1,97 +1,673 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tyngka CAGR Calculator - Calculate Annualized Returns</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Tyngka CAGR Calculator - Calculate Annualized Investment Growth
+    </title>
+
     <meta
         name="description"
-        content="Use the Tyngka CAGR Calculator to calculate the compound annual growth rate of an investment based on its beginning value, ending value, and investment period."
+        content="Use the Tyngka CAGR Calculator to calculate the compound annual growth rate of an investment based on its starting value, ending value, and investment period."
     >
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
     <main class="container">
 
+        <!-- Navigation -->
+
         <nav class="navigation">
 
-            <a href="index.html">Home</a>
-            <a href="sip.html">SIP Calculator</a>
-            <a href="cagr.html">CAGR Calculator</a>
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="sip.html">
+                SIP Calculator
+            </a>
+
+            <a href="step-up-sip.html">
+                Step-Up SIP Calculator
+            </a>
+
+            <a href="cagr.html">
+                CAGR Calculator
+            </a>
 
         </nav>
 
-        <h1>CAGR Calculator</h1>
 
-        <p class="subtitle">
-            Calculate the annualized growth rate of an investment.
-        </p>
+        <!-- Page Header -->
 
-        <section class="calculator">
-            <h2>CAGR Calculator</h2>
+        <section class="page-header">
 
-            <label for="beginning-value">
-                Beginning Value
-            </label>
+            <span class="eyebrow">
+                INVESTMENT CALCULATOR
+            </span>
 
-            <input
-                id="beginning-value"
-                type="number"
-                value="100000"
-                min="1"
-            >
+            <h1>
+                CAGR Calculator
+            </h1>
 
-            <label for="ending-value">
-                Ending Value
-            </label>
-
-            <input
-                id="ending-value"
-                type="number"
-                value="200000"
-                min="1"
-            >
-
-            <label for="years">
-                Investment Period (Years)
-            </label>
-
-            <input
-                id="years"
-                type="number"
-                value="10"
-                min="1"
-                max="100"
-                step="1"
-            >
-
-            <button id="calculate-cagr-button">
-                Calculate
-            </button>
-
-            <div id="cagr-result" class="result"></div>
+            <p class="subtitle">
+                Calculate the compound annual growth rate of an investment
+                based on its starting value, ending value, and investment period.
+            </p>
 
         </section>
-        <section class="about-section">
 
-            <h2>What is CAGR?</h2>
+
+        <!-- Calculator -->
+
+        <section class="calculator-layout">
+
+
+            <!-- Input Card -->
+
+            <div class="calculator calculator-input-card">
+
+                <div class="calculator-heading">
+
+                    <span class="calculator-icon">
+                        %
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Calculate your growth rate
+                        </h2>
+
+                        <p>
+                            Enter your investment details below.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="cagrForm">
+
+
+                    <label for="initial-investment">
+                        Initial Investment
+                    </label>
+
+                    <input
+                        id="initial-investment"
+                        type="number"
+                        value="100000"
+                        min="1"
+                        inputmode="numeric"
+                        required
+                    >
+
+
+                    <label for="final-investment">
+                        Final Investment Value
+                    </label>
+
+                    <input
+                        id="final-investment"
+                        type="number"
+                        value="200000"
+                        min="0"
+                        inputmode="numeric"
+                        required
+                    >
+
+
+                    <label for="years">
+                        Investment Period (Years)
+                    </label>
+
+                    <input
+                        id="years"
+                        type="number"
+                        value="5"
+                        min="1"
+                        max="100"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                    >
+
+
+                    <button
+                        id="calculate-button"
+                        type="submit"
+                    >
+                        Calculate
+                    </button>
+
+
+                    <p class="calculator-note">
+                        CAGR represents the annualized growth rate between
+                        the starting and ending values.
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <!-- Result Card -->
+
+            <div class="result-card">
+
+                <div class="result-card-header">
+
+                    <span class="eyebrow">
+                        YOUR RESULT
+                    </span>
+
+                    <h2>
+                        Annualized growth
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="result"
+                    class="result"
+                >
+
+                    <div
+                        id="result-placeholder"
+                        class="result-placeholder"
+                        hidden
+                    >
+
+                        <span class="result-placeholder-icon">
+                            %
+                        </span>
+
+                        <p>
+                            Enter your investment details and select
+                            <strong>Calculate</strong> to see your CAGR.
+                        </p>
+
+                    </div>
+
+
+                    <div id="result-values">
+
+                        <div class="result-item">
+
+                            <span>
+                                CAGR
+                            </span>
+
+                            <strong
+                                id="cagr-value"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="result-item">
+
+                            <span>
+                                Initial Investment
+                            </span>
+
+                            <strong
+                                id="initial-value"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="result-item">
+
+                            <span>
+                                Final Value
+                            </span>
+
+                            <strong
+                                id="final-value"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Growth Chart -->
+
+                <div
+                    id="projection-chart-section"
+                    class="projection-chart-section"
+                    hidden
+                >
+
+                    <div class="projection-chart-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                ILLUSTRATIVE GROWTH
+                            </span>
+
+                            <h3>
+                                Growth path
+                            </h3>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="maximize-chart-button"
+                            class="chart-expand-button"
+                            aria-label="Maximize CAGR growth chart"
+                            title="Expand chart"
+                        >
+                            ⛶
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="projection-chart"
+                        class="projection-chart"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Open enlarged CAGR growth chart"
+                    ></div>
+
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="legend-dot projected"></i>
+                            Growth path
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Chart Dialog -->
+
+        <dialog
+            id="chart-dialog"
+            class="chart-dialog"
+        >
+
+            <div class="chart-dialog-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ILLUSTRATIVE GROWTH
+                    </span>
+
+                    <h2>
+                        CAGR growth path
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="close-chart-button"
+                    class="chart-close-button"
+                    aria-label="Close chart"
+                    title="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="projection-chart-large"
+                class="projection-chart-large"
+            ></div>
+
+
+            <div class="chart-legend">
+
+                <span>
+                    <i class="legend-dot invested"></i>
+                    Starting value
+                </span>
+
+                <span>
+                    <i class="legend-dot projected"></i>
+                    Growth path
+                </span>
+
+            </div>
+
+        </dialog>
+
+
+        <!-- About -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                UNDERSTAND THE TOOL
+            </span>
+
+            <h2>
+                What is CAGR?
+            </h2>
 
             <p>
-                CAGR, or Compound Annual Growth Rate, measures the average
-                annual rate at which an investment grows over a period of time.
+                CAGR, or Compound Annual Growth Rate, represents the
+                annualized rate at which an investment would have grown
+                if it had increased at a constant rate over a specific
+                period.
             </p>
 
             <p>
-                Enter the beginning value, ending value, and investment period
-                to calculate the annualized growth rate of your investment.
+                It is useful for comparing the growth of investments
+                or other assets across different periods because it
+                converts the overall change into an annualized rate.
             </p>
+
+        </section>
+
+
+        <!-- How It Works -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                HOW IT WORKS
+            </span>
+
+            <h2>
+                How the CAGR calculator works
+            </h2>
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Enter the starting value
+                    </h3>
+
+                    <p>
+                        Enter the value of the investment at the beginning
+                        of the period.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Enter the ending value
+                    </h3>
+
+                    <p>
+                        Enter the value of the investment at the end of
+                        the period.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Calculate annualized growth
+                    </h3>
+
+                    <p>
+                        Tyngka converts the overall growth into an
+                        annualized compound growth rate.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Example -->
+
+        <section class="example-section">
+
+            <div class="example-card">
+
+                <div>
+
+                    <span class="eyebrow">
+                        EXAMPLE
+                    </span>
+
+                    <h2>
+                        See how the numbers come together
+                    </h2>
+
+                    <p>
+                        Suppose an investment grows from ₹1,00,000 to
+                        ₹2,00,000 over five years.
+                    </p>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Initial value
+                    </span>
+
+                    <strong>
+                        ₹1,00,000
+                    </strong>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Final value
+                    </span>
+
+                    <strong>
+                        ₹2,00,000
+                    </strong>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Period
+                    </span>
+
+                    <strong>
+                        5 years
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Assumptions -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                IMPORTANT
+            </span>
+
+            <h2>
+                Things to keep in mind
+            </h2>
+
+            <ul class="assumption-list">
+
+                <li>
+                    CAGR describes the annualized growth rate between
+                    two values.
+                </li>
+
+                <li>
+                    CAGR assumes a constant compounded annual growth
+                    rate for the calculation.
+                </li>
+
+                <li>
+                    The actual path of an investment may fluctuate
+                    significantly from year to year.
+                </li>
+
+                <li>
+                    CAGR does not describe volatility or the sequence
+                    of returns during the investment period.
+                </li>
+
+                <li>
+                    The growth chart on this page is an illustration
+                    based on the calculated CAGR, not a representation
+                    of actual historical performance.
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- Related Calculators -->
+
+        <section class="related-section">
+
+            <span class="eyebrow">
+                EXPLORE MORE
+            </span>
+
+            <h2>
+                Related calculators
+            </h2>
+
+            <div class="related-grid">
+
+                <a
+                    href="sip.html"
+                    class="related-card"
+                >
+
+                    <strong>
+                        SIP Calculator
+                    </strong>
+
+                    <span>
+                        Calculate the potential growth of regular monthly
+                        investments →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="step-up-sip.html"
+                    class="related-card"
+                >
+
+                    <strong>
+                        Step-Up SIP Calculator
+                    </strong>
+
+                    <span>
+                        See how increasing your SIP each year could affect
+                        long-term growth →
+                    </span>
+
+                </a>
+
+            </div>
 
         </section>
 
     </main>
+
+
+    <!-- Footer -->
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+            <strong>
+                TYNGKA
+            </strong>
+
+            <span>
+                Simple tools for understanding financial growth.
+            </span>
+
+        </div>
+
+    </footer>
+
+
     <script src="cagr.js"></script>
+
 </body>
+
 </html>
