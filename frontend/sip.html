@@ -1,105 +1,693 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyngka SIP Calculator - Calculate Investment Returns</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Tyngka SIP Calculator - Calculate Investment Returns
+    </title>
+
     <meta
         name="description"
-        content="Use the Tyngka SIP Calculator to estimate the future value of monthly investments based on your investment amount, expected return, and time period."
+        content="Use the Tyngka SIP Calculator to estimate how regular monthly investments could grow over time based on your investment amount, expected return, and investment period."
     >
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
     <main class="container">
 
+        <!-- Navigation -->
+
         <nav class="navigation">
-            <a href="index.html">Home</a>
-            <a href="sip.html">SIP Calculator</a>
-            <a href="cagr.html">CAGR Calculator</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="sip.html">
+                SIP Calculator
+            </a>
+
+            <a href="step-up-sip.html">
+                Step-Up SIP Calculator
+            </a>
+
+            <a href="cagr.html">
+                CAGR Calculator
+            </a>
+
         </nav>
 
-        <h1>SIP Calculator</h1>
 
-        <p class="subtitle">
-            Estimate the future value of your monthly investments.
-        </p>
+        <!-- Page Header -->
 
-            <label for="existing-investment">
-                Existing Investment
-            </label>
+        <section class="page-header">
 
-            <input
-                id="existing-investment"
-                type="number"
-                value="0"
-                min="0"
-            >
+            <span class="eyebrow">
+                INVESTMENT CALCULATOR
+            </span>
 
-            <label for="monthly-investment">
-                Monthly Investment
-            </label>
+            <h1>
+                SIP Calculator
+            </h1>
 
-            <input
-                id="monthly-investment"
-                type="number"
-                value="5000"
-		min = "1"
-            >
-
-            <label for="annual-return">
-                Expected Annual Return (%)
-            </label>
-
-            <input
-                id="annual-return"
-                type="number"
-                value="12" 
-		min = "0"
-		max = "100"
-		step="0.1"
-            >
-
-            <label for="years">
-                Investment Period (Years)
-            </label>
-
-            <input
-                id="years"
-                type="number"
-                value="20"
-		min = "1"
-		max="100"
-		step="1"
-            >
-
-            <button id="calculate-button">
-                Calculate
-            </button>
-
-            <div id="result" class="result"></div>
-
-        <section class="about-section">
-
-            <h2>What is a SIP Calculator?</h2>
-
-            <p>
-                A SIP Calculator helps estimate how your regular monthly
-                investments could grow over time based on an expected
-                annual return and investment period.
-            </p>
-
-            <p>
-                Enter your monthly investment, expected annual return,
-                and investment period to estimate your total investment,
-                future value, and potential returns.
+            <p class="subtitle">
+                Estimate how your regular monthly investments could
+                grow over time using an assumed annual return.
             </p>
 
         </section>
+
+
+        <!-- Calculator -->
+
+        <section class="calculator-layout">
+
+
+            <!-- Input Card -->
+
+            <div class="calculator calculator-input-card">
+
+                <div class="calculator-heading">
+
+                    <span class="calculator-icon">
+                        ₹
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Calculate your investment
+                        </h2>
+
+                        <p>
+                            Enter your investment details below.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="sipForm">
+
+
+                    <label for="existing-investment">
+                        Existing Investment
+                    </label>
+
+                    <input
+                        id="existing-investment"
+                        type="number"
+                        value="0"
+                        min="0"
+                        step="1000"
+                        inputmode="numeric"
+                    >
+
+
+                    <label for="monthly-investment">
+                        Monthly Investment
+                    </label>
+
+                    <input
+                        id="monthly-investment"
+                        type="number"
+                        value="5000"
+                        min="1"
+                        step="500"
+                        inputmode="numeric"
+                        required
+                    >
+
+
+                    <label for="annual-return">
+                        Expected Annual Return (%)
+                    </label>
+
+                    <input
+                        id="annual-return"
+                        type="number"
+                        value="12"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        inputmode="decimal"
+                        required
+                    >
+
+
+                    <label for="years">
+                        Investment Period (Years)
+                    </label>
+
+                    <input
+                        id="years"
+                        type="number"
+                        value="20"
+                        min="1"
+                        max="100"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                    >
+
+
+                    <button
+                        id="calculate-button"
+                        type="submit"
+                    >
+                        Calculate
+                    </button>
+
+
+                    <p class="calculator-note">
+                        The result is an illustration based on the
+                        return assumption you enter.
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <!-- Result Card -->
+
+            <div class="result-card">
+
+                <div class="result-card-header">
+
+                    <span class="eyebrow">
+                        YOUR PROJECTION
+                    </span>
+
+                    <h2>
+                        Potential growth
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="result"
+                    class="result"
+                >
+
+                    <!-- Initial state -->
+
+                    <div
+                        id="result-placeholder"
+                        class="result-placeholder"
+                        hidden
+                    >
+
+                        <span class="result-placeholder-icon">
+                            ↗
+                        </span>
+
+                        <p>
+                            Enter your investment details and select
+                            <strong>Calculate</strong> to see your projection.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Calculated values -->
+
+                    <div
+                        id="result-values"
+                    >
+
+                        <div class="result-item">
+
+                            <span>
+                                Future Value
+                            </span>
+
+                            <strong
+                                id="future-value"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="result-item">
+
+                            <span>
+                                Total Investment
+                            </span>
+
+                            <strong
+                                id="total-investment"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="result-item">
+
+                            <span>
+                                Estimated Returns
+                            </span>
+
+                            <strong
+                                id="estimated-returns"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Projection Chart -->
+
+                <div
+                    id="projection-chart-section"
+                    class="projection-chart-section"
+                    hidden
+                >
+
+                    <div class="projection-chart-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                GROWTH OVER TIME
+                            </span>
+
+                            <h3>
+                                Investment projection
+                            </h3>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="maximize-chart-button"
+                            class="chart-expand-button"
+                            aria-label="Maximize investment projection chart"
+                            title="Expand chart"
+                        >
+                            ⛶
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="projection-chart"
+                        class="projection-chart"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Open enlarged investment projection chart"
+                    ></div>
+
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="legend-dot invested"></i>
+                            Invested
+                        </span>
+
+                        <span>
+                            <i class="legend-dot projected"></i>
+                            Projected
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Chart Dialog -->
+
+        <dialog
+            id="chart-dialog"
+            class="chart-dialog"
+        >
+
+            <div class="chart-dialog-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        GROWTH OVER TIME
+                    </span>
+
+                    <h2>
+                        Investment projection
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="close-chart-button"
+                    class="chart-close-button"
+                    aria-label="Close chart"
+                    title="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="projection-chart-large"
+                class="projection-chart-large"
+            ></div>
+
+
+            <div class="chart-legend">
+
+                <span>
+                    <i class="legend-dot invested"></i>
+                    Invested
+                </span>
+
+                <span>
+                    <i class="legend-dot projected"></i>
+                    Projected
+                </span>
+
+            </div>
+
+        </dialog>
+
+
+        <!-- About -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                UNDERSTAND THE TOOL
+            </span>
+
+            <h2>
+                What is a SIP Calculator?
+            </h2>
+
+            <p>
+                A SIP, or Systematic Investment Plan, allows an investor
+                to invest a fixed amount at regular intervals. A SIP
+                calculator estimates how those contributions could grow
+                over a chosen period using an assumed annual return.
+            </p>
+
+            <p>
+                Tyngka separates the amount you contribute from the
+                estimated growth so you can understand where the
+                projected value comes from.
+            </p>
+
+        </section>
+
+
+        <!-- How It Works -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                HOW IT WORKS
+            </span>
+
+            <h2>
+                How the SIP calculator works
+            </h2>
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Choose your investment
+                    </h3>
+
+                    <p>
+                        Enter the amount you plan to invest each month.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Choose an assumption
+                    </h3>
+
+                    <p>
+                        Enter an assumed annual return and investment period.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Understand the projection
+                    </h3>
+
+                    <p>
+                        See your total contributions, estimated growth,
+                        and projected future value.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Example -->
+
+        <section class="example-section">
+
+            <div class="example-card">
+
+                <div>
+
+                    <span class="eyebrow">
+                        EXAMPLE
+                    </span>
+
+                    <h2>
+                        See how the numbers come together
+                    </h2>
+
+                    <p>
+                        Suppose you invest ₹5,000 every month for
+                        20 years and use a 12% annual return assumption.
+                    </p>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Monthly investment
+                    </span>
+
+                    <strong>
+                        ₹5,000
+                    </strong>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Period
+                    </span>
+
+                    <strong>
+                        20 years
+                    </strong>
+
+                </div>
+
+
+                <div class="example-value">
+
+                    <span>
+                        Return assumption
+                    </span>
+
+                    <strong>
+                        12%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Assumptions -->
+
+        <section class="content-section">
+
+            <span class="eyebrow">
+                IMPORTANT
+            </span>
+
+            <h2>
+                Things to keep in mind
+            </h2>
+
+            <ul class="assumption-list">
+
+                <li>
+                    The calculator uses the annual return assumption
+                    entered by the user.
+                </li>
+
+                <li>
+                    Actual investment returns can vary over time.
+                </li>
+
+                <li>
+                    The calculation is an illustration and is not a
+                    guarantee of future returns.
+                </li>
+
+                <li>
+                    Taxes, fees, inflation, and changes in investment
+                    contributions are not included unless specifically
+                    represented by the calculator.
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- Related Calculators -->
+
+        <section class="related-section">
+
+            <span class="eyebrow">
+                EXPLORE MORE
+            </span>
+
+            <h2>
+                Related calculators
+            </h2>
+
+            <div class="related-grid">
+
+                <a
+                    href="step-up-sip.html"
+                    class="related-card"
+                >
+
+                    <strong>
+                        Step-Up SIP Calculator
+                    </strong>
+
+                    <span>
+                        See how increasing your SIP each year could
+                        affect long-term growth →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="cagr.html"
+                    class="related-card"
+                >
+
+                    <strong>
+                        CAGR Calculator
+                    </strong>
+
+                    <span>
+                        Calculate the annualized growth rate of an
+                        investment →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
     </main>
+
+
+    <!-- Footer -->
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+            <strong>
+                TYNGKA
+            </strong>
+
+            <span>
+                Simple tools for understanding financial growth.
+            </span>
+
+        </div>
+
+    </footer>
+
+
     <script src="app.js"></script>
 
 </body>
+
 </html>
